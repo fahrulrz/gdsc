@@ -39,7 +39,7 @@ router.get("/", async (req, res) => {
 // Read single book
 router.get("/:id", async (req, res) => {
     try {
-        const book = await Book.findById(req.params.id); // mencari dokumen buku berdasarkan id
+        const book = await Book.findOne({ id: parseInt(req.params.id) }); // mencari dokumen buku berdasarkan id
         if (!book) {
             return res.status(404).json({ message: "Book not found" });
         }
@@ -54,12 +54,6 @@ router.put("/:id", async (req, res) => {
 
     try {
         const { title, author, published_at } = req.body;
-        console.log("ID Param: ", req.params.id);
-        
-        const bookId = parseInt(req.params.id, 10);
-        if (isNaN(bookId)) {
-            return res.status(400).json({ message: "Invalid id format" });
-        }
 
         const updateBook = await Book.findOneAndUpdate(
             { id: parseInt(req.params.id, 10) }, {
@@ -87,7 +81,7 @@ router.put("/:id", async (req, res) => {
 // Delete book
 router.delete("/:id", async (req, res) => {
     try {
-        const deleteBook = await Book.findByIdAndDelete(req.params.id);
+        const deleteBook = await Book.findOneAndDelete({ id: parseInt(req.params.id) });
         if (!deleteBook) {
             return res.status(404).json({ message: "Book not found" });
         }
