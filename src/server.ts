@@ -5,12 +5,11 @@ import bookRoutes from "./routes/books";
 import dotenv from "dotenv";
 import connectDB from './service/db';
 
-dotenv.config();
-const app = express();
-const PORT = process.env.PORT || 3000;
+dotenv.config(); // memuat variable
+const app = express(); // membuat app express
+const PORT = process.env.PORT || 3000; // menggunakan port yang ada di env atau default 3000
 
-connectDB();
-// const databaseUrl = process.env.DATABASE_URL;
+connectDB(); // mengoneksikan ke database
 
 // Middleware
 app.use(express.json());

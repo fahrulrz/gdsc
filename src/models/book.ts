@@ -1,7 +1,7 @@
 
 import mongoose, { Schema, Document } from "mongoose";
 
-
+// struktur book
 interface Book extends Document {
     id: Number;
     title: String;
@@ -10,6 +10,7 @@ interface Book extends Document {
     created_at: Date;
     updated_at: Date;
 }
+
 
 const bookSchema = new Schema<Book>({
     id: { type: Number, required: true, unique: true },

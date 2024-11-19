@@ -3,6 +3,7 @@ import Book from "../models/book";
 
 const router = Router();
 
+
 let currentId = 1;
 
 // Create book
@@ -13,8 +14,10 @@ router.post("/", async (req: Request, res: Response) => {
         return res.status(400).json({ message: "Invalid request data" });
     }
 
+    currentId = await Book.countDocuments() + 1;
+
     const newBook = new Book({
-        id: currentId++,
+        id: currentId,
         title,
         author,
         published_at,
