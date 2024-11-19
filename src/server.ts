@@ -1,14 +1,19 @@
 import 'dotenv/config';
-import bodyParser from "body-parser";
+// import bodyParser from "body-parser";
 import express from "express";
 import bookRoutes from "./routes/books";
+import dotenv from "dotenv";
+import connectDB from './service/db';
 
+dotenv.config();
 const app = express();
-const PORT = 8000;
-const databaseUrl = process.env.DATABASE_URL;
+const PORT = process.env.PORT;
+
+connectDB();
+// const databaseUrl = process.env.DATABASE_URL;
 
 // Middleware
-app.use(bodyParser.json());
+app.use(express.json());
 
 // Routes
 app.use("/api/books", bookRoutes);

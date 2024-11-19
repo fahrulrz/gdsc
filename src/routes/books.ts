@@ -1,29 +1,28 @@
 import { Request, Response, Router } from "express";
-import { Book } from "../models/book";
+import Book from "../models/book";
 
 const router = Router();
 
-let books: Book[] = [];
-let currentId = books.length;
+let currentId = 1;
 
 // Create book
-router.post("/", (req: Request, res: Response) => {
+router.post("/", async(req: Request, res: Response) => {
     const { title, author, published_at } = req.body;
 
     if (!title || !author || !published_at) {
         return res.status(400).json({ message: "Invalid request data" });
     }
 
-    const newBook: Book = {
+    const newBook = new Book({
         id: currentId++,
         title,
         author,
         published_at,
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString(),
-    };
+    });
 
-    books.push(newBook);
+    await newBook.save();
 
     res.status(201).json({
         message: "Book created successfully",
@@ -31,48 +30,64 @@ router.post("/", (req: Request, res: Response) => {
     });
 })
 
-
 // Read all books
-router.get("/", (req, res) => {
+router.get("/", async(req, res) => {
+    const books = await Book.find();
     res.status(200).json({ data: books })
 })
 
 // Read single book
-router.get("/:id", (req, res) => {
-    console.log("Request Params:", req.params);
-    const book = books.find((b) => b.id === parseInt(req.params.id, 10));
-    if (!book) {
-        return res.status(404).json({ message: "Book not found" });
+router.get("/:id", async(req, res) => {
+    try {
+        const book = await Book.findById(req.params.id); // mencari dokumen buku berdasarkan id
+        if (!book) {
+            return res.status(404).json({ message: "Book not found" });
+        }
+        res.status(200).json( book );
+    } catch (error) {
+        res.status(500).json({ message: "Book not found" })
     }
-    res.status(200).json(book);
 });
 
 // Update book
-router.put("/:id", (req, res) => {
-    const book = books.find((b) => b.id === parseInt(req.params.id, 10));
-    console.log(book);
-    if (!book) {
-        return res.status(404).json({ message: "Book not found" });
+router.put("/:id", async(req, res) => {
+
+    try {
+        const { title, author, published_at } = req.body;
+        const updateBook = await Book.findByIdAndUpdate(
+            req.params.id, {
+                ...(title && { title }), // mengupdate title jika ada
+                ...(author && { author }), // mengupdate author jika ada
+                ...(published_at && { published_at }), // mengupdate published_at jika ada
+                updated_at: new Date().toISOString(),
+            },
+            { new: true } // mengembalikan dokumen yang baru di update
+        );
+
+        if (!updateBook) {
+            return res.status(404).json({ message: "Book not found" });
+        }
+
+        res.status(200).json({
+            message: "Book updated successfully",
+            data: updateBook
+        });
+    } catch (error) {
+        res.status(500).json({ message: 'Error updating book', error: error })
     }
-    const { title, author, published_at } = req.body;
-    if (title) book.title = title;
-    if (author) book.author = author;
-    if (published_at) book.published_at = published_at;
-    book.updated_at = new Date().toISOString();
-    res.status(200).json({
-        message: "Book updated successfully",
-        data: book
-    });
-})
+});
 
 // Delete book
-router.delete("/:id", (req, res) => {
-    const bookIndex = books.findIndex((b) => b.id === parseInt(req.params.id));
-    if (bookIndex === -1) {
-        return res.status(404).json({ message: "Book not found" });
+router.delete("/:id", async(req, res) => {
+    try {
+        const deleteBook = await Book.findByIdAndDelete(req.params.id);
+        if (!deleteBook) {
+            return res.status(404).json({ message: "Book not found" });
+        }
+        res.status(200).json({ message: "Book deleted successfully" });
+    } catch (error) {
+        res.status(500).json({ message: "Book not found" });
     }
-    books.splice(bookIndex, 1);
-    res.status(200).json({ message: "Book deleted successfully" });
 });
 
 export default router;
