@@ -3,7 +3,7 @@ import { Book } from "../models/book";
 
 const router = Router();
 
-let books: Book[] =[];
+let books: Book[] = [];
 let currentId = books.length;
 
 // Create book
@@ -15,24 +15,25 @@ router.post("/", (req: Request, res: Response) => {
     }
 
     const newBook: Book = {
+        id: currentId++,
         title,
         author,
         published_at,
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString(),
-        id: currentId++,
     };
 
     books.push(newBook);
 
     res.status(201).json({
-        message: "Book created successfully", 
-        data: newBook });
+        message: "Book created successfully",
+        data: newBook
+    });
 })
 
 
 // Read all books
-router.get("/", (req, res)=> {
+router.get("/", (req, res) => {
     res.status(200).json({ data: books })
 })
 
@@ -49,18 +50,19 @@ router.get("/:id", (req, res) => {
 // Update book
 router.put("/:id", (req, res) => {
     const book = books.find((b) => b.id === parseInt(req.params.id, 10));
-    console.log(book);  
+    console.log(book);
     if (!book) {
         return res.status(404).json({ message: "Book not found" });
     }
     const { title, author, published_at } = req.body;
     if (title) book.title = title;
-    if (author)  book.author = author;
+    if (author) book.author = author;
     if (published_at) book.published_at = published_at;
     book.updated_at = new Date().toISOString();
-    res.status(200).json({ 
+    res.status(200).json({
         message: "Book updated successfully",
-        data: book });
+        data: book
+    });
 })
 
 // Delete book
