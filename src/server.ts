@@ -1,9 +1,11 @@
+import 'dotenv/config';
 import bodyParser from "body-parser";
 import express from "express";
 import bookRoutes from "./routes/books";
 
 const app = express();
 const PORT = 8000;
+const databaseUrl = process.env.DATABASE_URL;
 
 // Middleware
 app.use(bodyParser.json());
@@ -16,6 +18,10 @@ app.use((err: any, req: any, res: any, next: any) => {
     console.error(err.stack);
     res.status(500).send("Something went wrong!");
 });
+
+app.get("/", (req: any, res: any) => {
+    res.send("Hello World!");
+})
 
 // Start the server
 app.listen(PORT, () => {
