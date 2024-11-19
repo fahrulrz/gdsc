@@ -7,8 +7,8 @@ interface Book extends Document{
     title: string;
     author: string;
     published_at: String;
-    created_at: String;
-    updated_at: String;
+    created_at: Date;
+    updated_at: Date;
 }
 
 const bookSchema = new Schema<Book>({
@@ -16,8 +16,11 @@ const bookSchema = new Schema<Book>({
     title: { type: String, required: true },
     author: { type: String, required: true },
     published_at: { type: String, required: true },
-    created_at: { type: String, required: true },
-    updated_at: { type: String, required: true },
+}, {
+    timestamps: {
+        createdAt: "created_at",
+        updatedAt: "updated_at"
+    }
 });
 
 export default mongoose.model<Book>("Book", bookSchema);
