@@ -19,9 +19,11 @@ app.use((err: any, req: any, res: any, next: any) => {
     res.status(500).send("Something went wrong!");
 });
 
-app.get("/", (req: any, res: any) => {
-    res.send("Hello World!");
-})
+// app.get("/", (req: any, res: any) => {
+//     res.send("Hello World!");
+// })
+
+app.get("/", bookRoutes);
 
 // Start the server
 app.listen(PORT, () => {
