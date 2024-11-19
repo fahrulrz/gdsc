@@ -73,7 +73,7 @@ router.put("/:id", async(req, res) => {
             data: updateBook
         });
     } catch (error) {
-        res.status(500).json({ message: 'Error updating book', error: error })
+        res.status(500).json({ message: 'Error updating bookkkkkk', error: error })
     }
 });
 
