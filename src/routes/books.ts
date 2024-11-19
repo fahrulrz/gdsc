@@ -1,7 +1,6 @@
 import { Request, Response, Router } from "express";
 import { Book } from "../models/book";
 
-
 const router = Router();
 
 let books: Book[] =[];
