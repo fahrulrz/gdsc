@@ -3,7 +3,6 @@ import Book from "../models/book";
 
 const router = Router();
 
-
 let currentId = 1;
 
 // Create book
@@ -54,7 +53,6 @@ router.get("/:id", async (req, res) => {
 
 // Update book
 router.put("/:id", async (req, res) => {
-
     try {
         const { title, author, published_at } = req.body;
 

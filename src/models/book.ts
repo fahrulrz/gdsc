@@ -11,7 +11,6 @@ interface Book extends Document {
     updated_at: Date;
 }
 
-
 const bookSchema = new Schema<Book>({
     id: { type: Number, required: true, unique: true },
     title: { type: String, required: true },
