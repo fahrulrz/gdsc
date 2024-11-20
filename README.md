@@ -1,5 +1,5 @@
 
-# Book API Documentation
+# API Documentation
 
 This API provides a simple way to manage books. It includes endpoints for creating, retrieving, updating, and deleting books.
 
