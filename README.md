@@ -8,6 +8,9 @@ This API provides a simple way to manage books. It includes endpoints for creati
 http://localhost:3000/api/books
 ```
 
+## Link Deployed
+[Vercel](https://gdsc-mu.vercel.app)    
+
 ## Endpoints
 
 ### 1. **Create a Book**
@@ -177,5 +180,3 @@ curl -X DELETE http://localhost:3000/api/books/1
 
 ---
 
-## License
-This project is licensed under the MIT License.
