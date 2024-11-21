@@ -8,7 +8,7 @@ This API provides a simple way to manage books. It includes endpoints for creati
 http://localhost:3000/api/books
 ```
 
-## Link Deployed
+## Deployed Link
 [Vercel](https://gdsc-mu.vercel.app)    
 
 ## Endpoints
