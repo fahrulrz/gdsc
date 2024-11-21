@@ -23,7 +23,7 @@ app.use((err: any, req: any, res: any, next: any) => {
 });
 
 app.get("/", (req: any, res: any) => {
-    res.send("This is fahrul rest api \n you can use https://gdsc-mu.vercel.app/api/books to use book api");
+    res.send(["This is fahrul rest api"], ["you can use https://gdsc-mu.vercel.app/api/books to use book api"]);
 });
 
 // Start the server
