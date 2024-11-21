@@ -9,8 +9,8 @@ http://localhost:3000/api/books
 ```
 
 ## Deployed Link
-[Vercel](https://gdsc-mu.vercel.app) -> main
-[Vercel](https://gdsc-mu.vercel.app/api/books) -> book api
+- [Vercel](https://gdsc-mu.vercel.app) -> main
+- [Vercel](https://gdsc-mu.vercel.app/api/books) -> book api
 
 
 ## Endpoints
