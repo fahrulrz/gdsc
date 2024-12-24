@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import express from "express";
 import bookRoutes from "./routes/books";
+import nameRoutes from "./routes/bakaranNames";
 import dotenv from "dotenv";
 import connectDB from './service/db';
 
@@ -15,6 +16,7 @@ app.use(express.json());
 
 // Routes
 app.use("/api/books", bookRoutes);
+app.use("/api/bakaranNames", nameRoutes);
 
 // Error handling middleware
 app.use((err: any, req: any, res: any, next: any) => {
