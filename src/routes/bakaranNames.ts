@@ -32,4 +32,18 @@ router.get("/", async (req: Request, res: Response) => {
     res.json(names);
 });
 
+// Delete name
+router.delete("/:id", async (req: Request, res: Response) => {
+    try {
+        const deletedName = await BakaranName.findOneAndDelete({ id: parseInt(req.params.id, 10) });
+        if (!deletedName) {
+            return res.status(404).json({ message: "Name not found" });
+        }
+        res.status(200).json({ message: "Name deleted successfully" });
+    } catch (error) {
+        res.status(500).json({ message: "Error deleting name", error });
+    }
+});
+        
+
 export default router;
