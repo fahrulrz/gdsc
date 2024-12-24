@@ -1,9 +1,9 @@
-import 'dotenv/config';
 import express from "express";
 import bookRoutes from "./routes/books";
 import nameRoutes from "./routes/bakaranNames";
 import dotenv from "dotenv";
 import connectDB from './service/db';
+import cors from 'cors';
 
 dotenv.config(); // memuat variable
 const app = express(); // membuat app express
@@ -13,6 +13,7 @@ connectDB(); // mengoneksikan ke database
 
 // Middleware
 app.use(express.json());
+app.use(cors());
 
 // Routes
 app.use("/api/books", bookRoutes);
