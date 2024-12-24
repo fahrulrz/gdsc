@@ -16,7 +16,7 @@ app.use(express.json());
 
 // Routes
 app.use("/api/books", bookRoutes);
-app.use("/api/bakaranNames", nameRoutes);
+app.use("/api/bakaran-names", nameRoutes);
 
 // Error handling middleware
 app.use((err: any, req: any, res: any, next: any) => {

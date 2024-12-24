@@ -24,4 +24,10 @@ router.post("/", async (req: Request, res: Response) => {
     });
 });
 
+// Get all names
+router.get("/", async (req: Request, res: Response) => {
+    const names = await BakaranName.find();
+    res.json(names);
+});
+
 export default router;
