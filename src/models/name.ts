@@ -3,6 +3,8 @@ import mongoose, { Schema, Document } from "mongoose";
 interface Name extends Document {
     id: Number;
     name: String;
+    created_at: Date;
+    updated_at: Date;
 }
 
 const nameSchema = new Schema<Name>({

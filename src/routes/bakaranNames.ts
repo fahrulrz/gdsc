@@ -14,6 +14,8 @@ router.post("/", async (req: Request, res: Response) => {
     const newName = new BakaranName({
         id: await BakaranName.countDocuments() + 1,
         name,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
     });
 
     await newName.save();
