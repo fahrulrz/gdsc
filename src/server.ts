@@ -8,6 +8,7 @@ import connectDB from './service/db';
 dotenv.config(); // memuat variable
 const app = express(); // membuat app express
 const PORT = process.env.PORT || 3000; // menggunakan port yang ada di env atau default 3000
+const cors = require('cors')
 
 connectDB(); // mengoneksikan ke database
 
@@ -30,6 +31,10 @@ app.get("/", (req: any, res: any) => {
         bookApi: "https://gdsc-mu.vercel.app/api/books",
     });
 });
+
+app.use(cors({
+    origin: 'http://localhost:3000',
+}));
 
 // Start the server
 app.listen(PORT, () => {
